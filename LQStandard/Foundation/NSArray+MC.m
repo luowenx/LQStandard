@@ -56,6 +56,16 @@
     }
 }
 
+- (NSArray *)disorder {
+    
+    return [self sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        if (arc4random()%101 > 50) {
+            return NSOrderedDescending;
+        }
+        return NSOrderedAscending;
+    }];
+}
+
 
 @end
 

@@ -18,6 +18,8 @@
 
 - (NSArray *)head:(NSUInteger)count;
 
+- (NSArray *)disorder;
+
 @end
 
 @interface NSMutableArray<ObjectType> (MC)

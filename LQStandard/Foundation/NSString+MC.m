@@ -324,4 +324,11 @@
     return self;
 }
 
+-(NSString *)safeSubstringWithRang:(NSRange)range {
+    if (range.location >=0 && (range.length + range.location) <= self.length) {
+        return [self substringWithRange:range];
+    }
+    return self;
+}
+
 @end

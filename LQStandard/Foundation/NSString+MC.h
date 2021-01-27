@@ -54,4 +54,7 @@
 
 -(NSString *)safeSubstringToIndex:(NSInteger)index;
 
+-(NSString *)safeSubstringWithRang:(NSRange)range;
+
+
 @end
