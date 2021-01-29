@@ -13,6 +13,9 @@
 - (CGSize)getSizeWithConntainSize:(CGSize)size font:(UIFont *)font;
 - (CGSize)getSizeWithConntainSize:(CGSize)size font:(UIFont *)font lineBreakMode:(NSLineBreakMode)mode;
 
+- (CGSize)sizeWithFont:(UIFont *)font byWidth:(CGFloat)width lineSpacing:(CGFloat)lineSpacing;
+- (CGSize)sizeWithFont:(UIFont *)font byHeight:(CGFloat)height lineSpacing:(CGFloat)lineSpacing;
+
 + (NSString *)formatNumberStringForKiloWithString:(NSString*)numberString;
 
 + (NSString *)formatNumberStringForChatWithString:(NSString*)numberString;

@@ -15,21 +15,36 @@
     return [self getSizeWithConntainSize:size font:font lineBreakMode:NSLineBreakByWordWrapping];
 }
 
--(CGSize)getSizeWithConntainSize:(CGSize)size font:(UIFont *)font lineBreakMode:(NSLineBreakMode)mode
+-(CGSize)getSizeWithConntainSize:(CGSize)size font:(UIFont *)font lineBreakMode:(NSLineBreakMode)mode {
+    return [self getSizeWithConntainSize:size font:font lineBreakMode:mode lineSpacing:0];
+}
+
+
+-(CGSize)getSizeWithConntainSize:(CGSize)size font:(UIFont *)font lineBreakMode:(NSLineBreakMode)mode lineSpacing:(CGFloat)lineSpacing
 {
     CGSize strSize = CGSizeZero;
     
     if(( [[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending )){
+        
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         paragraphStyle.lineBreakMode = mode;
+        
+        if (lineSpacing > 0) {
+            [paragraphStyle setLineSpacing:lineSpacing - (font.lineHeight - font.pointSize)];
+        }
+        
         NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
         strSize = [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
     }
-//    else{
-//        strSize = [self sizeWithFont:font constrainedToSize:size lineBreakMode:mode];
-//    }
-    
     return strSize;
+}
+
+- (CGSize)sizeWithFont:(UIFont *)font byWidth:(CGFloat)width lineSpacing:(CGFloat)lineSpacing {
+    return [self getSizeWithConntainSize:CGSizeMake(width, CGFLOAT_MAX) font:font lineBreakMode:NSLineBreakByWordWrapping lineSpacing:lineSpacing];
+}
+
+- (CGSize)sizeWithFont:(UIFont *)font byHeight:(CGFloat)height lineSpacing:(CGFloat)lineSpacing {
+    return [self getSizeWithConntainSize:CGSizeMake(CGFLOAT_MAX, height) font:font lineBreakMode:NSLineBreakByWordWrapping lineSpacing:lineSpacing];
 }
 
 + (NSString *)formatNumberStringWithNumberString:(NSString*)numberString
